@@ -41,15 +41,14 @@
                         <div class="card-body">
                             <?php if(!empty($comments)) : ?>
                                 <?php foreach($comments as $comment) :?>
-                                    <div class="d-flex flex-start align-items-center">
-                                        <div>
-                                            <h6 class="fw-bold text-primary">
-                                                <?= $comment['user_comment_name'] ?>
-                                                <h8 class="p-3 text-black"><?= $comment['cmt_created_at'] ?></h8>
-                                                <a style="text-align: right;" class="btn btn-danger">Delete</a>
-                                            </h6> 
-                                            
-                                        </div>
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="fw-bold text-primary">
+                                            <?= $comment['user_comment_name'] ?>
+                                            <h8 class="p-3 text-black"><?= $comment['cmt_created_at'] ?></h8>
+                                        </h6> 
+                                        <?php if(isset($_SESSION['username']) && $_SESSION['username'] == $comment['user_comment_name']) : ?>
+                                            <a class="btn btn-danger btn-sm rounded-pill">Delete</a>
+                                        <?php endif; ?>
                                     </div>
                                     <p class="mt-3 mb-4 pb-2">
                                         <?= $comment['comment'] ?>
