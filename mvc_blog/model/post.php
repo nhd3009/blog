@@ -111,4 +111,19 @@
             echo "". $e->getMessage();
         }
     }
+
+    function delete_comment($id, $username){
+        $conn = connect_database();
+        try{
+            $sql = "DELETE from comments where id = :id and user_name_comment = :user_name";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":user_name", $username);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $e) {
+            echo "". $e->getMessage();
+        }
+    }
 ?>

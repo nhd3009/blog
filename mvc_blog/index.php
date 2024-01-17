@@ -172,6 +172,28 @@
                                     include('view/home.php');
                                 }
                                 break;
+                            case 'delete_comment':
+                                if(isset($_GET['comment_id']) && isset($_GET['post_id']) && isset($_GET['user_name'])){
+                                    if(!isset($_SESSION['user_id'])){
+                                        
+                                        echo "<script>window.alert('No session id');</script>";
+                                        // header('location: index.php?content=login');
+                                    }
+                                    else{
+                                        $comment_id = $_GET['comment_id'];
+                                        $post_id = $_GET['post_id'];
+                                        $username = $_GET['user_name'];
+                                        if($_SESSION['username'] == $username){
+                                            delete_comment($comment_id, $username);
+                                            header('location: index.php?content=post_detail&id='. $post_id);
+                                        }
+                                        else{
+                                            echo "<script>window.alert('". $_SESSION['username'] . "and lmao&" . $_GET['user_name'] ."');</script>";
+                                            // header('location: index.php?content=logout');
+                                        }
+                                    }    
+                                }
+                                break;
                             default:
                                 $categories = get_all_categories();
                                 $posts = get_all_post();

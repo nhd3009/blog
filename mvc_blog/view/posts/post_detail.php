@@ -47,7 +47,7 @@
                                             <h8 class="p-3 text-black"><?= $comment['cmt_created_at'] ?></h8>
                                         </h6> 
                                         <?php if(isset($_SESSION['username']) && $_SESSION['username'] == $comment['user_comment_name']) : ?>
-                                            <a class="btn btn-danger btn-sm rounded-pill">Delete</a>
+                                            <a href="index.php?content=delete_comment&comment_id=<?= $comment['comment_id'] ?>&post_id=<?= $comment['post_id'] ?>&user_name=<?= $comment['user_comment_name'] ?>" class="btn btn-danger btn-sm rounded-pill">Delete</a>
                                         <?php endif; ?>
                                     </div>
                                     <p class="mt-3 mb-4 pb-2">
