@@ -29,7 +29,7 @@
     <h3 class="text-center" style="margin: 20px;">Categories</h3>
     <?php 
         foreach ($categories as $row){
-            if($_GET['category_id'] == $row['id']){
+            if(isset($_GET['category_id']) && $_GET['category_id'] == $row['id']){
                 continue;
             }
             else{

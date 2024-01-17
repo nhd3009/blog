@@ -1,5 +1,5 @@
 <?php
-    if($_GET['content'] != 'post_detail') :
+    if( !isset($_GET['content']) || (isset($_GET['content']) && $_GET['content'] != 'post_detail')) :
 ?>
 <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
     <div class="container position-relative px-4 px-lg-5">
