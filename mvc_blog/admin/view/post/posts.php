@@ -11,6 +11,7 @@
                         <th scope="col">title</th>
                         <th scope="col">category</th>
                         <th scope="col">user</th>
+                        <th scope="col">Detail</th>
                         <th scope="col">status</th>
                         <th scope="col">delete</th>
                         </tr>
@@ -27,6 +28,7 @@
                                     ?>
                                 </td>
                                 <td><?= $post['user_name'] ?></td>
+                                <td><a href="index.php?admin_content=detail_post&id=<?= $post['id'] ?>" class="btn btn-primary  text-center ">Detail</a></td>
                                 <?php
                                     if($post['status'] == 1){
                                         echo '<td><a href="index.php?admin_content=change_post_status&status=0&id='. $post['id'] .'" class="btn btn-success  text-center ">Activated</a></td>';

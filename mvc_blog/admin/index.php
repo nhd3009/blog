@@ -23,6 +23,7 @@
         <?php
             if(isset($_GET['admin_content'])){
                 switch($_GET['admin_content']){
+
                     case 'login':
                         include('view/auth/login.php');
                         if(isset($_POST['login_admin_submit'])){
@@ -50,11 +51,13 @@
                             header('location: index.php');
                         }
                         break;
+
                     case 'logout':
                         session_unset();
                         session_destroy();
                         header('Location: index.php?admin_content=login');
                         break;
+
                     case 'admins':
                         if(!isset($_SESSION["admin_id"])){
                             header('location: index.php?admin_content=logout');
@@ -64,6 +67,7 @@
                             include('view/admin/admin.php');
                         }
                         break;
+
                     case 'create_admin':
                         if(!isset($_SESSION["admin_id"])){
                             header('location: index.php?admin_content=logout');
@@ -84,6 +88,7 @@
                             }
                         }
                         break;
+
                     case 'categories':
                         if(!isset($_SESSION["admin_id"])){
                             header('location: index.php?admin_content=logout');
@@ -93,6 +98,7 @@
                             include('view/category/categories.php');
                         }
                         break;
+
                     case 'create_category':
                         if(!isset($_POST["create_category_submit"])){
                             include('view/category/create_category.php');
@@ -111,6 +117,7 @@
                             }
                         }
                         break;
+
                     case 'update_category':
                         if(isset($_GET['id']) && isset($_SESSION['admin_id'])){
                             if(!isset($_POST['update_category_submit'])){
@@ -134,6 +141,7 @@
                             header('location: index.php?admin_content=logout');
                         }
                         break;
+
                     case 'delete_category':
                         if(isset($_GET['id']) && isset($_SESSION['admin_id'])){
                             $id = $_GET['id'];
@@ -144,6 +152,7 @@
                             header('location: index.php?admin_content=logout');
                         }
                         break;
+                        
                     case 'posts':
                         if(!isset($_SESSION["admin_id"])){
                             header('location: index.php?admin_content=logout');
@@ -154,6 +163,7 @@
                             include('view/post/posts.php');
                         }
                         break;
+
                     case 'change_post_status':
                         if(isset($_GET['status']) && isset($_GET['id']) && isset($_SESSION['admin_id'])){
                             $id = $_GET['id'];
@@ -185,6 +195,55 @@
                             header('location: index.php?admin_content=logout');
                         }
                         break;
+
+                    case 'change_status_comment':
+                        if(isset($_GET['comment_id']) && isset($_GET['status']) && isset($_GET['post_id'])){
+                            if(!isset($_SESSION['admin_id'])){
+                                header('location: index.php?admin_content=logout');
+                            }
+                            else{
+                                $comment_id = $_GET['comment_id'];
+                                $status = $_GET['status'];
+                                $post_id = $_GET['post_id'];
+                                $result = change_status_comment($comment_id, $status);
+                                if($result){
+                                    header('location: index.php?admin_content=detail_post&id=' . $post_id);
+                                }
+                                else{
+                                    echo "<script>window.alert('Changing status failed');</script>";
+                                }
+                                
+                            }
+                        }
+                        break;
+                    case 'delete_comment':
+                        if(isset($_GET['comment_id']) && isset($_GET['post_id'])){
+                            if(!isset($_SESSION['admin_id'])){
+                                header('location: index.php?admin_content=logout');
+                            }
+                            else{
+                                $comment_id = $_GET['comment_id'];
+                                $post_id = $_GET['post_id'];
+                                $result = delete_comment($comment_id);
+                                if($result){
+                                    header('location: index.php?admin_content=detail_post&id=' . $post_id);
+                                }
+                                else{
+                                    echo "<script>window.alert('Changing status failed');</script>";
+                                }
+                            }
+                        }
+                        break;
+
+                    case 'detail_post':
+                        if(isset($_GET['id'])){
+                            $id = $_GET['id'];
+                            $post = get_detail_post($id);
+                            $comments = get_comment_by_post_id($id);
+                            include('view/post/post_detail.php');
+                        }
+                        break;
+
                     default:
                         if(!isset($_SESSION["adminname"])){
                             header('location: index.php?admin_content=logout');
