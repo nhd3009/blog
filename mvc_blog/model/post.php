@@ -9,7 +9,7 @@
     function get_posts_by_category( $category_id ){
         $conn = connect_database();
         try{
-            $sql = "Select * from posts where category_id = :category";
+            $sql = "Select * from posts where category_id = :category and status = 1";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(":category", $category_id);
             $stmt->execute();
