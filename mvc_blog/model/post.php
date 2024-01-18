@@ -126,4 +126,19 @@
             echo "". $e->getMessage();
         }
     }
+
+    function search_post($search_query){
+        $conn = connect_database();
+        try {
+            $sql = "SELECT * FROM posts WHERE title LIKE :search and status = 1";
+            $stmt = $conn->prepare($sql);
+            $search_param = '%' . $search_query . '%';
+            $stmt->bindParam(":search", $search_param);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    
 ?>

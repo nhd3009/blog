@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php  $i=0; foreach($post_list as $post): ?>
+                        <?php  $i=1; foreach($post_list as $post): ?>
                             <tr>
                                 <th scope="row"><?= $i++ ?></th>
                                 <td><?= $post['title'] ?></td>

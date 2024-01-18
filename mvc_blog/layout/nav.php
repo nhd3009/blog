@@ -8,6 +8,13 @@
         <?php if(isset($_SESSION['username'])) : ?>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <div class="ml-4 input-group ps-5">
+                        <div id="navbar-search-autocomplete" class="w-100 mr-4">
+                            <form method="POST" action="" class="mr-4">
+                                <input name="search" type="search" id="form1" class="form-control mt-3" placeholder="search" />
+                            </form>
+                        </div>
+                    </div>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php?content=create_post">Create</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php?content=contact">contact</a></li>
@@ -25,6 +32,11 @@
         <?php else : ?>
             <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <div id="navbar-search-autocomplete" class="w-100 mr-4">
+                    <form method="POST" action="" class="mr-4">
+                        <input name="search" type="search" id="form1" class="form-control mt-3" placeholder="search" />
+                    </form>
+                </div>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php?content=login">Login</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php?content=register">Register</a></li>
